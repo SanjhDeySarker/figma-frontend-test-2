@@ -1,0 +1,310 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Georgia, serif;
+  color: #222;
+  background: #fff;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* HEADER */
+header {
+  border-bottom: 1px solid #eee;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #222;
+}
+
+.search {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(90deg, #6e0000, #a30000);
+  color: #fff;
+  padding: 5rem 0;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero img {
+  width: 100%;
+  border-radius: 16px;
+}
+
+/* BUTTON */
+.btn {
+  background: #000;
+  color: #fff;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  display: inline-block;
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+/* SECTIONS */
+.section {
+  padding: 4rem 0;
+  width: 100%;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+/* SPOTLIGHT */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.card img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* DISCOUNT */
+.discount {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  background: #e63946;
+  color: #fff;
+  padding: 3rem;
+  border-radius: 20px;
+}
+
+.discount img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* STORY */
+.story {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  background: #faf7f3;
+  padding: 3rem;
+  border-radius: 20px;
+  align-items: center;
+}
+
+.story img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: auto;
+}
+
+/* BLOGS — THIS WAS THE MAIN ISSUE */
+.blogs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.blog {
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.blog img {
+  width: 100%;
+  height: 260px;              /* 🔥 FIX */
+  object-fit: cover;          /* 🔥 FIX */
+  display: block;
+}
+
+/* PRODUCTS */
+.products {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1.5rem;
+}
+
+.product img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* FOOTER */
+footer {
+  background: #2b2b2b;
+  color: #bbb;
+  padding: 3rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero-grid,
+  .discount,
+  .story {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .blogs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .nav ul {
+    display: none;
+  }
+
+  .cards,
+  .products,
+  .blogs,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================
+   HOVER ANIMATIONS
+========================= */
+
+/* NAV LINKS */
+.nav a {
+  transition: color 0.3s ease;
+}
+
+.nav a:hover {
+  color: #8b0000;
+}
+
+/* BUTTON */
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+}
+
+/* SPOTLIGHT CARDS */
+.card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.15);
+}
+
+.card img {
+  transition: transform 0.4s ease;
+}
+
+.card:hover img {
+  transform: scale(1.06);
+}
+
+/* BLOG CARDS */
+.blog {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.blog:hover {
+  transform: translateY(-14px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.18);
+}
+
+.blog img {
+  transition: transform 0.4s ease;
+}
+
+.blog:hover img {
+  transform: scale(1.08);
+}
+
+/* PRODUCTS */
+.product {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.product:hover {
+  transform: translateY(-16px);
+  box-shadow: 0 22px 45px rgba(0,0,0,0.2);
+}
+
+.product img {
+  transition: transform 0.45s ease;
+}
+
+.product:hover img {
+  transform: scale(1.1);
+}
+
+/* STORY IMAGE */
+.story img {
+  transition: transform 0.4s ease;
+}
+
+.story img:hover {
+  transform: scale(1.05);
+}
