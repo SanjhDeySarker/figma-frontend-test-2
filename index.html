@@ -4,25 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Modern Women</title>
+
   <style>
     :root {
       --primary: #8b0000;
-      --secondary: #f5f0ea;
       --dark: #222;
-      --muted: #777;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Georgia', serif;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      line-height: 1.6;
       color: var(--dark);
       background: #fff;
-      line-height: 1.6;
     }
 
     img { width: 100%; display: block; }
@@ -33,8 +33,8 @@
       padding: 0 1rem;
     }
 
+    /* HEADER */
     header {
-      background: #fff;
       border-bottom: 1px solid #eee;
     }
 
@@ -47,21 +47,34 @@
 
     .nav ul {
       display: flex;
-      gap: 2rem;
       list-style: none;
+      gap: 2rem;
     }
 
     .nav a {
       text-decoration: none;
       color: var(--dark);
-      font-weight: 500;
+      position: relative;
     }
+
+    .nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width .3s;
+    }
+
+    .nav a:hover::after { width: 100%; }
 
     /* HERO */
     .hero {
-      background: linear-gradient(90deg, #6e0000, #a30000);
+      background: linear-gradient(90deg,#6e0000,#a30000);
       color: #fff;
-      padding: 4rem 0;
+      padding: 5rem 0;
     }
 
     .hero-grid {
@@ -71,47 +84,51 @@
       gap: 2rem;
     }
 
-    .hero h1 {
-      font-size: 2.8rem;
-      margin-bottom: 1rem;
-    }
+    .hero h1 { font-size: 2.8rem; }
 
     .btn {
       display: inline-block;
       margin-top: 1.5rem;
-      padding: 0.75rem 1.5rem;
+      padding: .75rem 1.75rem;
       background: #000;
       color: #fff;
       border-radius: 30px;
       text-decoration: none;
+      transition: all .3s ease;
     }
+
+    .btn:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    .section { padding: 4rem 0; }
+
+    .section-title { text-align: center; margin-bottom: 3rem; }
 
     /* SPOTLIGHT */
-    .section {
-      padding: 4rem 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3,1fr);
       gap: 2rem;
     }
 
     .card {
       text-align: center;
+      cursor: pointer;
+      transition: transform .3s;
     }
+
+    .card:hover { transform: scale(1.05); }
 
     /* DISCOUNT */
     .discount {
       background: #e63946;
       color: #fff;
       border-radius: 16px;
-      padding: 2rem;
+      padding: 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -121,17 +138,27 @@
     /* PRODUCTS */
     .products {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(5,1fr);
       gap: 1.5rem;
     }
 
     .product {
-      background: #fff;
       padding: 1rem;
       border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,.05);
       text-align: center;
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
     }
+
+    .product img { transition: transform .4s; }
+
+    .product:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(0,0,0,.15);
+    }
+
+    .product:hover img { transform: scale(1.08); }
 
     /* FOOTER */
     footer {
@@ -142,26 +169,25 @@
 
     footer .grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(4,1fr);
       gap: 2rem;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 1024px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .products { grid-template-columns: repeat(3, 1fr); }
-      footer .grid { grid-template-columns: repeat(2, 1fr); }
+    /* TABLET */
+    @media (max-width:1024px) {
+      .hero-grid { grid-template-columns:1fr; text-align:center; }
+      .cards { grid-template-columns:repeat(2,1fr); }
+      .products { grid-template-columns:repeat(3,1fr); }
+      footer .grid { grid-template-columns:repeat(2,1fr); }
     }
 
-    @media (max-width: 768px) {
-      .nav ul { display: none; }
-      .cards { grid-template-columns: 1fr; }
-      .products { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2rem; }
-      .products { grid-template-columns: 1fr; }
+    /* MOBILE */
+    @media (max-width:480px) {
+      body { font-size:14px; }
+      .nav ul { display:none; }
+      .hero h1 { font-size:2rem; }
+      .cards, .products, footer .grid { grid-template-columns:1fr; }
+      .discount { flex-direction:column; text-align:center; }
     }
   </style>
 </head>
@@ -184,49 +210,74 @@
   <div class="container hero-grid">
     <div>
       <h1>Where Every Shade Tells a Story</h1>
-      <p>Bold colors crafted for confidence, creativity, and self‑expression.</p>
-      <a class="btn" href="#">Shop Now</a>
+      <p>Bold colors crafted for confidence, creativity, and self-expression.</p>
+      <a href="#" class="btn">Shop Now</a>
     </div>
     <div>
-      <!-- Product Image -->
+      <img src="https://images.unsplash.com/photo-1600180758895-2c9c0b50b38c?auto=format&fit=crop&w=1200&q=80" alt="Luxury Lipstick Collection">
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-title">
-      <h2>Spotlight of the Month</h2>
-    </div>
+    <div class="section-title"><h2>Spotlight of the Month</h2></div>
     <div class="cards">
-      <div class="card">Influencer of the Month</div>
-      <div class="card">Makeup of the Month</div>
-      <div class="card">Purchaser of the Month</div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"><p>Influencer of the Month</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"><p>Makeup of the Month</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"><p>Purchaser of the Month</p></div>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container discount">
-    <div>
-      <h2>50% Discount</h2>
-      <p>Summer Sale Starts Soon</p>
-    </div>
-    <a class="btn" href="#">Shop More</a>
+    <div><h2>50% Discount</h2><p>Summer Sale Starts Soon</p></div>
+    <a href="#" class="btn">Shop More</a>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-title">
-      <h2>Luxe Lips Collection</h2>
-    </div>
+    <div class="section-title"><h2>Luxe Lips Collection</h2></div>
     <div class="products">
-      <div class="product">Lipstick</div>
-      <div class="product">Lipstick</div>
-      <div class="product">Lipstick</div>
-      <div class="product">Lipstick</div>
-      <div class="product">Lipstick</div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1585386959984-a4155228c6a0?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Crimson Matte" loading="lazy">
+    <p>Crimson Matte</p>
+  </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Nude Glow" loading="lazy">
+    <p>Nude Glow</p>
+  </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1610992015734-19b0c97a6b1e?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Collection" loading="lazy">
+    <p>Luxury Lipstick Collection</p>
+  </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Berry Shine" loading="lazy">
+    <p>Berry Shine</p>
+  </div>
+  <div class="product">
+    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Classic Red" loading="lazy">
+    <p>Classic Red</p>
+  </div>
+</div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80" alt="Luxury Lipstick">
+        <p>Rose Velvet</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1610992015734-19b0c97a6b1e?auto=format&fit=crop&w=600&q=80" alt="Luxury Lipstick">
+        <p>Nude Glow</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="Luxury Lipstick">
+        <p>Berry Shine</p>
+      </div>
+      <div class="product">
+        <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80" alt="Luxury Lipstick">
+        <p>Classic Red</p>
+      </div>
     </div>
   </div>
 </section>
