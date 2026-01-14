@@ -9,6 +9,7 @@
     :root {
       --primary: #8b0000;
       --dark: #222;
+      --light: #faf7f3;
     }
 
     * {
@@ -42,7 +43,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       padding: 1rem 0;
+      flex-wrap: wrap;
     }
 
     .nav ul {
@@ -70,6 +73,12 @@
 
     .nav a:hover::after { width: 100%; }
 
+    .search-box input {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+
     /* HERO */
     .hero {
       background: linear-gradient(90deg,#6e0000,#a30000);
@@ -94,7 +103,7 @@
       color: #fff;
       border-radius: 30px;
       text-decoration: none;
-      transition: all .3s ease;
+      transition: .3s;
     }
 
     .btn:hover {
@@ -105,7 +114,6 @@
 
     /* SECTIONS */
     .section { padding: 4rem 0; }
-
     .section-title { text-align: center; margin-bottom: 3rem; }
 
     /* SPOTLIGHT */
@@ -117,22 +125,56 @@
 
     .card {
       text-align: center;
-      cursor: pointer;
       transition: transform .3s;
     }
 
     .card:hover { transform: scale(1.05); }
 
     /* DISCOUNT */
-    .discount {
+    .discount-banner {
       background: #e63946;
       color: #fff;
-      border-radius: 16px;
-      padding: 2.5rem;
-      display: flex;
-      justify-content: space-between;
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
       align-items: center;
       gap: 2rem;
+    }
+
+    /* OUR STORY */
+    .story-card {
+      background: var(--light);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .story-img img {
+      border-radius: 50%;
+      max-width: 280px;
+      margin: auto;
+    }
+
+    /* BLOGS */
+    .blogs {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1.5rem;
+    }
+
+    .blog {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .blog-content {
+      padding: 1rem;
     }
 
     /* PRODUCTS */
@@ -147,18 +189,13 @@
       border-radius: 12px;
       box-shadow: 0 10px 20px rgba(0,0,0,.05);
       text-align: center;
-      cursor: pointer;
-      transition: transform .3s, box-shadow .3s;
+      transition: .3s;
     }
-
-    .product img { transition: transform .4s; }
 
     .product:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 35px rgba(0,0,0,.15);
     }
-
-    .product:hover img { transform: scale(1.08); }
 
     /* FOOTER */
     footer {
@@ -173,21 +210,24 @@
       gap: 2rem;
     }
 
-    /* TABLET */
+    /* RESPONSIVE */
     @media (max-width:1024px) {
-      .hero-grid { grid-template-columns:1fr; text-align:center; }
+      .hero-grid,
+      .story-card,
+      .discount-banner {
+        grid-template-columns:1fr;
+        text-align:center;
+      }
       .cards { grid-template-columns:repeat(2,1fr); }
       .products { grid-template-columns:repeat(3,1fr); }
+      .blogs { grid-template-columns:repeat(2,1fr); }
       footer .grid { grid-template-columns:repeat(2,1fr); }
     }
 
-    /* MOBILE */
     @media (max-width:480px) {
-      body { font-size:14px; }
       .nav ul { display:none; }
+      .cards, .products, .blogs, footer .grid { grid-template-columns:1fr; }
       .hero h1 { font-size:2rem; }
-      .cards, .products, footer .grid { grid-template-columns:1fr; }
-      .discount { flex-direction:column; text-align:center; }
     }
   </style>
 </head>
@@ -196,6 +236,9 @@
 <header>
   <div class="container nav">
     <strong>MODERN WOMEN</strong>
+    <div class="search-box">
+      <input type="text" placeholder="Search products...">
+    </div>
     <ul>
       <li><a href="#">Home</a></li>
       <li><a href="#">Products</a></li>
@@ -213,9 +256,7 @@
       <p>Bold colors crafted for confidence, creativity, and self-expression.</p>
       <a href="#" class="btn">Shop Now</a>
     </div>
-    <div>
-      <img src="https://images.unsplash.com/photo-1600180758895-2c9c0b50b38c?auto=format&fit=crop&w=1200&q=80" alt="Luxury Lipstick Collection">
-    </div>
+    <img src="https://images.unsplash.com/photo-1600180758895-2c9c0b50b38c?auto=format&fit=crop&w=1200&q=80">
   </div>
 </section>
 
@@ -223,66 +264,58 @@
   <div class="container">
     <div class="section-title"><h2>Spotlight of the Month</h2></div>
     <div class="cards">
-      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"><p>Influencer of the Month</p></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"><p>Makeup of the Month</p></div>
-      <div class="card"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"><p>Purchaser of the Month</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80"><p>Influencer</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"><p>Makeup</p></div>
+      <div class="card"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"><p>Customer</p></div>
     </div>
   </div>
 </section>
 
 <section class="section">
-  <div class="container discount">
-    <div><h2>50% Discount</h2><p>Summer Sale Starts Soon</p></div>
-    <a href="#" class="btn">Shop More</a>
+  <div class="container discount-banner">
+    <div>
+      <h2>50% OFF Luxe Lipsticks</h2>
+      <p>Limited time offer</p>
+      <a href="#" class="btn">Shop Sale</a>
+    </div>
+    <img src="https://images.unsplash.com/photo-1585386959984-a4155228c6a0?auto=format&fit=crop&w=600&q=80">
   </div>
 </section>
 
-<section class="section" id="our-story">
-  <div class="container">
-    <div class="section-title"><h2>Our Story</h2></div>
-    <p style="max-width:800px;margin:0 auto;text-align:center;">
-      Modern Women was born from a passion for empowering self-expression. Our luxury lipstick collection blends bold pigments with nourishing formulas, crafted for confidence, creativity, and timeless beauty.
-    </p>
-  </div>
-</section>
-
-<section class="section" id="spotlight-video">
-  <div class="container">
-    <div class="section-title"><h2>Spotlight Video</h2></div>
-    <div style="max-width:900px;margin:0 auto;">
-      <iframe width="100%" height="450" src="https://www.youtube.com/embed/8W6d6PZsUjA" title="Makeup Spotlight" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<section class="section">
+  <div class="container story-card">
+    <div class="story-img">
+      <img src="https://images.unsplash.com/photo-1603415526960-f7e0328b7a4b?auto=format&fit=crop&w=600&q=80">
+    </div>
+    <div>
+      <small>BEAUTY THAT SPEAKS CONFIDENCE</small>
+      <h2>Our Story</h2>
+      <p>
+        Modern Women was born from a passion for empowering self-expression.
+        From bold lipsticks to luxury beauty essentials, every product is crafted
+        with care, creativity, and confidence.
+      </p>
+      <p><strong>Our Founder</strong> — Salma B</p>
     </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
-    <div class="section-title"><h2>Luxe Lips Collection</h2></div>
-    <div class="products">
-      <div class="product"><img src="https://images.unsplash.com/photo-1585386959984-a4155228c6a0?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Crimson Matte" loading="lazy"><p>Crimson Matte</p></div>
-      <div class="product"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Nude Glow" loading="lazy"><p>Nude Glow</p></div>
-      <div class="product"><img src="https://images.unsplash.com/photo-1610992015734-19b0c97a6b1e?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Collection" loading="lazy"><p>Luxury Collection</p></div>
-      <div class="product"><img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Berry Shine" loading="lazy"><p>Berry Shine</p></div>
-      <div class="product"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=80" alt="Luxury Lipstick Classic Red" loading="lazy"><p>Classic Red</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="feedback">
-  <div class="container">
-    <div class="section-title"><h2>Client Feedback</h2></div>
-    <div class="cards">
-      <div class="card"><p>“The pigmentation is unreal. Best lipstick I’ve ever owned.”</p><strong>— Emily R.</strong></div>
-      <div class="card"><p>“Luxury feel, long-lasting, and super comfortable.”</p><strong>— Sophia K.</strong></div>
-      <div class="card"><p>“Every shade feels empowering. Absolutely love it.”</p><strong>— Ava M.</strong></div>
+    <div class="section-title"><h2>Latest News & Blogs</h2></div>
+    <div class="blogs">
+      <div class="blog"><img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=80"><div class="blog-content">Beauty Tips</div></div>
+      <div class="blog"><img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=800&q=80"></div>
+      <div class="blog"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80"></div>
+      <div class="blog"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=80"></div>
     </div>
   </div>
 </section>
 
 <footer>
   <div class="container grid">
-    <div>About Modern Women</div>
-    <div>Quick Links</div>
+    <div>About</div>
+    <div>Links</div>
     <div>Categories</div>
     <div>Contact</div>
   </div>
